@@ -2,14 +2,14 @@
 name: Terraform Validations
 
 on: 
-  pull_request_target:
+  pull_request:
     branches:
       - main 
     types: [opened, synchronize, reopened]
 
 env: 
   # Set the working directory for Terraform
-  TF_VERSION: "5.87.0"   
+  TF_VERSION: "1.1.7"   
 
 jobs:
   # The job terraformvalidations runs on the latest Ubuntu environment
