@@ -1,14 +1,8 @@
-# resource "aws_key_pair" "csye6225" {
-#   key_name   = "csye6225"
-#   public_key = file("~/.ssh/id_rsa.pub")  
-# }
-
 # EC2 Instance
 resource "aws_instance" "webapp_ec2" {
   ami                    = var.custom_ami_id
   instance_type          = var.ec2_instance_type
   subnet_id              = aws_subnet.csye6225_public_subnet[0].id
-#   key_name               = aws_key_pair.csye6225.key_name
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
   root_block_device {

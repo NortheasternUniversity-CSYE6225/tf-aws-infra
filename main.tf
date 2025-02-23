@@ -23,6 +23,6 @@ module "vpc" {
   volume_type             = var.volume_type
   delete_on_termination   = var.delete_on_termination
   disable_api_termination = var.disable_api_termination
-  key_pair_name           = var.key_pair_name
   ec2_instance_type       = var.ec2_instance_type
+  protocol                = var.protocol
 }

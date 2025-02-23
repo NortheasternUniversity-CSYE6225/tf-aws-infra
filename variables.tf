@@ -105,11 +105,6 @@ variable "ec2_instance_type" {
   description = "EC2 instance type"
 }
 
-variable "key_pair_name" {
-  type        = string
-  description = "Key pair name"
-}
-
 variable "volume_size" {
   type        = number
   description = "Volume size"
@@ -128,4 +123,9 @@ variable "delete_on_termination" {
 variable "disable_api_termination" {
   type        = bool
   description = "Disable API termination"
+}
+
+variable "protocol" {
+  type        = string
+  description = "Protocol"
 }

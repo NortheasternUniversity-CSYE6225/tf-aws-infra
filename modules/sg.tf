@@ -8,7 +8,7 @@ resource "aws_security_group" "app_sg" {
   ingress {
     from_port   = var.ssh_port
     to_port     = var.ssh_port
-    protocol    = "tcp"
+    protocol    = var.protocol
     cidr_blocks = var.ssh_port_cidr
   }
 
@@ -16,7 +16,7 @@ resource "aws_security_group" "app_sg" {
   ingress {
     from_port   = var.http_port
     to_port     = var.http_port
-    protocol    = "tcp"
+    protocol    = var.protocol
     cidr_blocks = var.http_port_cidr
   }
 
@@ -24,7 +24,7 @@ resource "aws_security_group" "app_sg" {
   ingress {
     from_port   = var.https_port
     to_port     = var.https_port
-    protocol    = "tcp"
+    protocol    = var.protocol
     cidr_blocks = var.https_port_cidr
   }
 
@@ -32,17 +32,9 @@ resource "aws_security_group" "app_sg" {
   ingress {
     from_port   = var.app_port
     to_port     = var.app_port
-    protocol    = "tcp"
+    protocol    = var.protocol
     cidr_blocks = var.app_port_cidr
   }
-
-  #   # Outbound traffic
-  #   egress {
-  #     from_port   = 0
-  #     to_port     = 0
-  #     protocol    = "-1"
-  #     cidr_blocks = ["0.0.0.0/0"]
-  #   }
 
   tags = {
     Name = "application-security-group"
