@@ -54,3 +54,64 @@ variable "instance_tenancy" {
   description = "Tenancy of the instance"
   default     = "default"
 }
+
+variable "app_port" {
+  type        = number
+  description = "Custom Application port"
+}
+
+variable "ssh_port_cidr" {
+  type        = list(string)
+  description = "CIDR blocks for SSH access"
+}
+
+variable "http_port_cidr" {
+  type        = list(string)
+  description = "CIDR blocks for HTTP access"
+}
+
+variable "https_port_cidr" {
+  type        = list(string)
+  description = "CIDR blocks for HTTPS access"
+}
+
+variable "app_port_cidr" {
+  type        = list(string)
+  description = "CIDR blocks for Application port access"
+}
+
+variable "custom_ami_id" {
+  type        = string
+  description = "Custom AMI ID"
+}
+
+variable "ec2_instance_type" {
+  type        = string
+  description = "EC2 instance type"
+}
+
+variable "volume_size" {
+  type        = number
+  description = "Volume size"
+}
+
+variable "volume_type" {
+  type        = string
+  description = "Volume type"
+}
+
+variable "delete_on_termination" {
+  type        = bool
+  description = "Delete on termination"
+}
+
+variable "disable_api_termination" {
+  type        = bool
+  description = "Disable API termination"
+}
+
+variable "target_subnet_index" {
+  type        = number
+  description = "Index of the target subnet"
+  default     = 0
+}
