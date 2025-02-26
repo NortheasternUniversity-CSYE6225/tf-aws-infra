@@ -60,21 +60,6 @@ variable "app_port" {
   description = "Custom Application port"
 }
 
-variable "ssh_port" {
-  type        = number
-  description = "Custom SSH port"
-}
-
-variable "http_port" {
-  type        = number
-  description = "Custom HTTP port"
-}
-
-variable "https_port" {
-  type        = number
-  description = "Custom HTTPS port"
-}
-
 variable "ssh_port_cidr" {
   type        = list(string)
   description = "CIDR blocks for SSH access"
@@ -125,7 +110,8 @@ variable "disable_api_termination" {
   description = "Disable API termination"
 }
 
-variable "protocol" {
-  type        = string
-  description = "Protocol"
+variable "target_subnet_index" {
+  type        = number
+  description = "Index of the target subnet"
+  default     = 0
 }

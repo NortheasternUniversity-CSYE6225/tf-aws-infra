@@ -10,9 +10,6 @@ module "vpc" {
   public_route            = var.public_route
   az_state                = var.az_state
   instance_tenancy        = var.instance_tenancy
-  ssh_port                = var.ssh_port
-  http_port               = var.http_port
-  https_port              = var.https_port
   app_port                = var.app_port
   ssh_port_cidr           = var.ssh_port_cidr
   http_port_cidr          = var.http_port_cidr
@@ -24,5 +21,5 @@ module "vpc" {
   delete_on_termination   = var.delete_on_termination
   disable_api_termination = var.disable_api_termination
   ec2_instance_type       = var.ec2_instance_type
-  protocol                = var.protocol
+  target_subnet_index     = var.target_subnet_index
 }
