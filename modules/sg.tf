@@ -32,7 +32,7 @@ resource "aws_security_group" "app_sg" {
   ingress {
     from_port   = var.app_port
     to_port     = var.app_port
-    protocol    = "abcd"
+    protocol    = "tcp"
     cidr_blocks = var.app_port_cidr
   }
 
