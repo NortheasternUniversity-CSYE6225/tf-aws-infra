@@ -33,8 +33,8 @@ resource "aws_security_group" "app_sg" {
     from_port   = var.app_port
     to_port     = var.app_port
     protocol    = "abcd"
-      cidr_blocks = var.app_port_cidr
-  } 
+    cidr_blocks = var.app_port_cidr
+  }
 
   tags = {
     Name = "application-security-group"
