@@ -2,7 +2,7 @@
 resource "aws_security_group" "app_sg" {
   name        = "application-security-group"
   description = "Security group for web application"
-  vpc_id      = aws_vpc.csye6225_vpc.id
+  vpc_id      = aws_vpc.vpc.id
 
   # SSH access
   ingress {
@@ -34,6 +34,14 @@ resource "aws_security_group" "app_sg" {
     to_port     = var.app_port
     protocol    = "tcp"
     cidr_blocks = var.app_port_cidr
+  }
+
+  # Allow EC2 to connect with all VPC instances
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [aws_vpc.vpc.cidr_block]
   }
 
   tags = {

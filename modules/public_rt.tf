@@ -1,10 +1,10 @@
 # Create a Public Route Table
-resource "aws_route_table" "csye6225_public_rt" {
-  vpc_id = aws_vpc.csye6225_vpc.id
+resource "aws_route_table" "public_rt" {
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = var.public_route
-    gateway_id = aws_internet_gateway.csye6225_igw.id
+    gateway_id = aws_internet_gateway.igw.id
   }
 
   tags = {
@@ -13,8 +13,8 @@ resource "aws_route_table" "csye6225_public_rt" {
 }
 
 # Public Route Table Associations
-resource "aws_route_table_association" "csye6225_public_rt_association" {
+resource "aws_route_table_association" "public_rt_association" {
   count          = var.public_subnet_count
-  subnet_id      = aws_subnet.csye6225_public_subnet[count.index].id
-  route_table_id = aws_route_table.csye6225_public_rt.id
+  subnet_id      = aws_subnet.public_subnet[count.index].id
+  route_table_id = aws_route_table.public_rt.id
 }

@@ -115,3 +115,53 @@ variable "target_subnet_index" {
   description = "Index of the target subnet"
   default     = 0
 }
+
+variable "rds_instance_class" {
+  type        = string
+  description = "RDS instance class"
+}
+
+variable "rds_name" {
+  type        = string
+  description = "RDS name"
+}
+
+variable "rds_username" {
+  type        = string
+  description = "RDS username"
+}
+
+variable "rds_engine" {
+  type        = string
+  description = "RDS engine"
+}
+
+variable "rds_engine_version" {
+  type        = string
+  description = "RDS engine version"
+}
+
+variable "rds_allocated_storage" {
+  type        = number
+  description = "RDS allocated storage"
+}
+
+variable "rds_storage_type" {
+  type        = string
+  description = "RDS storage type"
+}
+
+variable "s3_encryption_algorithm" {
+  type        = string
+  description = "S3 encryption algorithm"
+}
+
+variable "s3_transition_days" {
+  type        = number
+  description = "S3 transition days"
+}
+
+variable "s3_transition_storage_class" {
+  type        = string
+  description = "S3 transition storage class"
+}
