@@ -36,12 +36,12 @@ resource "aws_security_group" "app_sg" {
     cidr_blocks = var.app_port_cidr
   }
 
-  # Allow EC2 to connect with all VPC instances
+  # Egress rule
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [aws_vpc.vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {

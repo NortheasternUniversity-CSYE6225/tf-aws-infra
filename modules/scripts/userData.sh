@@ -41,8 +41,10 @@ log "Database and S3 configurations saved successfully."
 sudo chown csye6225:csye6225 /opt/csye6225/webapp/application.properties
 sudo chmod 600 /opt/csye6225/webapp/application.properties
 
-# Set up systemd service
+# Start SystemD service
 sudo systemctl daemon-reload
+sudo systemctl daemon-reexec
 sudo systemctl enable webapp.service
+sudo systemctl start webapp.service
 
 log "User Data Script completed successfully."
