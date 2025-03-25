@@ -17,7 +17,7 @@ export DB_NAME="${DB_NAME}"
 export DB_USERNAME="${DB_USERNAME}"
 export DB_PASSWORD="${DB_PASSWORD}"
 export S3_BUCKET_NAME="${S3_BUCKET_NAME}"
-export S3_REGION="${S3_REGION}"
+export REGION="${REGION}"
 
 # Ensure application directory exists
 sudo mkdir -p /opt/csye6225/webapp
@@ -32,17 +32,19 @@ spring.datasource.password=${DB_PASSWORD}
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.hibernate.ddl-auto=update
 aws.s3.bucket-name=${S3_BUCKET_NAME}
-aws.s3.region=${S3_REGION}
+aws.s3.region=${REGION}
 server.port=8080
 
-# Micrometer CloudWatch Metrics Config
-management.metrics.export.cloudwatch.enabled=true
-management.metrics.export.cloudwatch.namespace=WebAppMetrics
-management.metrics.export.cloudwatch.batch-size=20
-management.metrics.export.cloudwatch.step=10s
-management.metrics.tags.application=webapp
-management.metrics.export.cloudwatch.region=${S3_REGION}
+# Logging
+logging.file.name=/var/log/csye6225/webapp.log
+logging.level.root=INFO
 logging.level.io.micrometer.cloudwatch2=DEBUG
+
+# Enable CloudWatch Metrics
+management.metrics.export.cloudwatch.enabled=true
+management.metrics.export.cloudwatch.batch-size=10
+management.metrics.export.cloudwatch.region=${REGION}
+management.metrics.tags.application=webapp
 EOT
 log "Database and S3 configurations saved successfully."
 
