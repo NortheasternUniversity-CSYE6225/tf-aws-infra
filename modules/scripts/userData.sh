@@ -34,6 +34,14 @@ spring.jpa.hibernate.ddl-auto=update
 aws.s3.bucket-name=${S3_BUCKET_NAME}
 aws.s3.region=${S3_REGION}
 server.port=8080
+
+# Micrometer CloudWatch Metrics Config
+management.metrics.export.cloudwatch.enabled=true
+management.metrics.export.cloudwatch.namespace=WebAppMetrics
+management.metrics.export.cloudwatch.batch-size=20
+management.metrics.export.cloudwatch.step=10s
+management.metrics.tags.application=webapp
+management.metrics.export.cloudwatch.region=${S3_REGION}
 EOT
 log "Database and S3 configurations saved successfully."
 
@@ -41,10 +49,25 @@ log "Database and S3 configurations saved successfully."
 sudo chown csye6225:csye6225 /opt/csye6225/webapp/application.properties
 sudo chmod 600 /opt/csye6225/webapp/application.properties
 
+# Ensure log directory
+log "Ensuring log directory exists..."
+sudo mkdir -p /var/log/csye6225
+sudo chown -R csye6225:csye6225 /var/log/csye6225
+sudo chmod -R 700 /var/log/csye6225
+
 # Start SystemD service
 sudo systemctl daemon-reload
 sudo systemctl daemon-reexec
 sudo systemctl enable webapp.service
 sudo systemctl start webapp.service
+
+# Start CloudWatch Agent
+log "Starting CloudWatch Agent..."
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+  -a fetch-config \
+  -m ec2 \
+  -c file:/opt/csye6225/webapp/aws/amazon-cloudwatch-agent/cloudwatch-config.json \
+  -s
+log "CloudWatch Agent started successfully."
 
 log "User Data Script completed successfully."
