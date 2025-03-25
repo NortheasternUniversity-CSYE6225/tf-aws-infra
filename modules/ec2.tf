@@ -40,7 +40,7 @@ resource "aws_instance" "webapp_ec2" {
     DB_USERNAME    = aws_db_instance.postgres16_rds.username,
     DB_PASSWORD    = random_password.rds_password.result,
     S3_BUCKET_NAME = aws_s3_bucket.bucket.id,
-    S3_REGION      = var.region
+    REGION         = var.region
   })
 
   tags = {

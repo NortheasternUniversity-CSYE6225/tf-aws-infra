@@ -37,7 +37,10 @@ resource "aws_iam_policy" "webapp_cloudwatch_metrics" {
       {
         Effect = "Allow",
         Action = [
-          "cloudwatch:PutMetricData"
+          "cloudwatch:PutMetricData",
+          "cloudwatch:ListMetrics",
+          "cloudwatch:GetMetricData",
+          "cloudwatch:GetMetricStatistics"
         ],
         Resource = "*"
       }
