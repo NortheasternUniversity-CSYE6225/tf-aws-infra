@@ -42,6 +42,7 @@ management.metrics.export.cloudwatch.batch-size=20
 management.metrics.export.cloudwatch.step=10s
 management.metrics.tags.application=webapp
 management.metrics.export.cloudwatch.region=${S3_REGION}
+logging.level.io.micrometer.cloudwatch2=DEBUG
 EOT
 log "Database and S3 configurations saved successfully."
 
