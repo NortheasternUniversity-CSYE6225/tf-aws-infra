@@ -22,6 +22,9 @@ export REGION="${REGION}"
 # Ensure application directory exists
 sudo mkdir -p /opt/csye6225/webapp
 
+# Install postgresql client
+sudo apt install -y postgresql-client-16
+
 # Create application.properties file with environment variables
 log "Creating application.properties..."
 sudo tee /opt/csye6225/webapp/application.properties > /dev/null <<EOT
