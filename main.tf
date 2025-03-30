@@ -44,4 +44,5 @@ module "vpc" {
   asg_scale_up_adjustment     = var.asg_scale_up_adjustment
   asg_scale_down_threshold    = var.asg_scale_down_threshold
   asg_scale_up_threshold      = var.asg_scale_up_threshold
+  zone_name                   = var.zone_name
 }

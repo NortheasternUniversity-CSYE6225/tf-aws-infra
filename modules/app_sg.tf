@@ -6,10 +6,10 @@ resource "aws_security_group" "app_sg" {
 
   # SSH - only from Load Balancer SG
   ingress {
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    security_groups = [aws_security_group.lb_sg.id]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.ssh_port_cidr
   }
 
   # Application port (e.g., 8080) - only from Load Balancer SG

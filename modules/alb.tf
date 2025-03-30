@@ -22,7 +22,7 @@ resource "aws_lb_target_group" "webapp_tg" {
     path                = var.alb_health_check_path
     protocol            = "HTTP"
     matcher             = "200"
-    interval            = 30
+    interval            = 90
     timeout             = 2
     healthy_threshold   = 2
     unhealthy_threshold = 2

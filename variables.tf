@@ -220,3 +220,8 @@ variable "asg_scale_down_threshold" {
   type        = number
   description = "Threshold for scaling down the Auto Scaling Group"
 }
+
+variable "zone_name" {
+  type        = string
+  description = "Route53 zone name"
+}

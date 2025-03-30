@@ -1,6 +1,6 @@
 # Create RDS Security Group
 resource "aws_security_group" "rds_sg" {
-  name        = "rds-security-group"
+  name        = "database-security-group"
   description = "Security group for RDS instance"
   vpc_id      = aws_vpc.vpc.id
 

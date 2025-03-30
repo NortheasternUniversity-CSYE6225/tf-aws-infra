@@ -1,6 +1,6 @@
 # Create IAM role for EC2 instance to access S3 bucket.
 resource "aws_iam_role" "ec2_webapp_role" {
-  name = "webapp-ec2-s3-role"
+  name = "ec2-webapp-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -34,6 +34,6 @@ resource "aws_iam_role_policy_attachment" "webapp_cloudwatch_metrics" {
 
 # Create an instance profile
 resource "aws_iam_instance_profile" "ec2_webapp_profile" {
-  name = "webapp-ec2-s3-profile"
+  name = "ec2-webapp-profile"
   role = aws_iam_role.ec2_webapp_role.name
 }
