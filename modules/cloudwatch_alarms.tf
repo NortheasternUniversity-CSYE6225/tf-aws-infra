@@ -2,13 +2,13 @@
 resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   alarm_name          = "cpu-utilization-high"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 1
+  evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 10
+  period              = 60
   statistic           = "Average"
   threshold           = var.asg_scale_up_threshold
-  alarm_description   = "Scale up if CPU > 6.8%"
+  alarm_description   = "Scale up if CPU > 8%"
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.webapp_asg.name
   }
@@ -20,13 +20,13 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
 resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   alarm_name          = "cpu-utilization-low"
   comparison_operator = "LessThanThreshold"
-  evaluation_periods  = 1
+  evaluation_periods  = 2
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 10
+  period              = 60
   statistic           = "Average"
   threshold           = var.asg_scale_down_threshold
-  alarm_description   = "Scale down if CPU < 6.3%"
+  alarm_description   = "Scale down if CPU < 6%"
   dimensions = {
     AutoScalingGroupName = aws_autoscaling_group.webapp_asg.name
   }

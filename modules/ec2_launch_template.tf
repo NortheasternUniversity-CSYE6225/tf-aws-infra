@@ -41,6 +41,10 @@ resource "aws_launch_template" "webapp_lt" {
     security_groups             = [aws_security_group.app_sg.id]
   }
 
+  monitoring {
+    enabled = true
+  }
+
   user_data = base64encode(templatefile("${path.module}/scripts/userData.sh", {
     DB_HOST        = aws_db_instance.postgres16_rds.address,
     DB_PORT        = aws_db_instance.postgres16_rds.port,

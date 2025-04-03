@@ -5,7 +5,7 @@ resource "aws_autoscaling_group" "webapp_asg" {
   min_size                  = var.asg_min_capacity
   desired_capacity          = var.asg_desired_capacity
   vpc_zone_identifier       = [for subnet in aws_subnet.public_subnet : subnet.id]
-  health_check_type         = "EC2"
+  health_check_type         = "ELB"
   health_check_grace_period = var.asg_grace_period
   default_cooldown          = var.asg_cooldown_period
   target_group_arns         = [aws_lb_target_group.webapp_tg.arn]
