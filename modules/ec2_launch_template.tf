@@ -16,24 +16,36 @@ resource "local_file" "private_key" {
   filename = "${path.module}/my-windows-key-pair.pem"
 }
 
-# EC2 Instance
-resource "aws_instance" "webapp_ec2" {
-  ami                    = var.custom_ami_id
-  instance_type          = var.ec2_instance_type
-  subnet_id              = aws_subnet.public_subnet[var.target_subnet_index].id
-  vpc_security_group_ids = [aws_security_group.app_sg.id]
-  key_name               = aws_key_pair.this.key_name
-  iam_instance_profile   = aws_iam_instance_profile.webapp_s3_profile.name
+# Create a launch template for the web application instances
+resource "aws_launch_template" "webapp_lt" {
+  name_prefix   = "csye6225_asg"
+  image_id      = var.custom_ami_id
+  instance_type = var.ec2_instance_type
+  key_name      = aws_key_pair.this.key_name
 
-  root_block_device {
-    volume_size           = var.volume_size
-    volume_type           = var.volume_type
-    delete_on_termination = var.delete_on_termination
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2_webapp_profile.name
   }
 
-  disable_api_termination = var.disable_api_termination
+  block_device_mappings {
+    device_name = "/dev/xvda"
+    ebs {
+      volume_size           = var.volume_size
+      volume_type           = var.volume_type
+      delete_on_termination = var.delete_on_termination
+    }
+  }
 
-  user_data = templatefile("${path.module}/scripts/userData.sh", {
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups             = [aws_security_group.app_sg.id]
+  }
+
+  monitoring {
+    enabled = true
+  }
+
+  user_data = base64encode(templatefile("${path.module}/scripts/userData.sh", {
     DB_HOST        = aws_db_instance.postgres16_rds.address,
     DB_PORT        = aws_db_instance.postgres16_rds.port,
     DB_NAME        = aws_db_instance.postgres16_rds.db_name,
@@ -41,9 +53,5 @@ resource "aws_instance" "webapp_ec2" {
     DB_PASSWORD    = random_password.rds_password.result,
     S3_BUCKET_NAME = aws_s3_bucket.bucket.id,
     REGION         = var.region
-  })
-
-  tags = {
-    Name = "webapp-instance"
-  }
+  }))
 }

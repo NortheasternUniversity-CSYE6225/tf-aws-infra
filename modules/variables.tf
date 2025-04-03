@@ -70,6 +70,11 @@ variable "app_port_cidr" {
   description = "CIDR blocks for Application port access"
 }
 
+variable "egress_cidr" {
+  type        = list(string)
+  description = "CIDR blocks for egress access"
+}
+
 variable "custom_ami_id" {
   type        = string
   description = "Custom AMI ID"
@@ -159,4 +164,59 @@ variable "s3_transition_days" {
 variable "s3_transition_storage_class" {
   type        = string
   description = "S3 transition storage class"
+}
+
+variable "asg_max_capacity" {
+  type        = number
+  description = "Auto Scaling Group maximum capacity"
+}
+
+variable "asg_min_capacity" {
+  type        = number
+  description = "Auto Scaling Group minimum capacity"
+}
+
+variable "asg_desired_capacity" {
+  type        = number
+  description = "Auto Scaling Group desired capacity"
+}
+
+variable "asg_cooldown_period" {
+  type        = number
+  description = "Auto Scaling Group cooldown period in seconds"
+}
+
+variable "asg_grace_period" {
+  type        = number
+  description = "Auto Scaling Group health check grace period in seconds"
+}
+
+variable "alb_health_check_path" {
+  type        = string
+  description = "ALB health check path"
+}
+
+variable "asg_scale_up_adjustment" {
+  type        = number
+  description = "Scaling adjustment for scaling up the Auto Scaling Group"
+}
+
+variable "asg_scale_down_adjustment" {
+  type        = number
+  description = "Scaling adjustment for scaling down the Auto Scaling Group"
+}
+
+variable "asg_scale_up_threshold" {
+  type        = number
+  description = "Threshold for scaling up the Auto Scaling Group"
+}
+
+variable "asg_scale_down_threshold" {
+  type        = number
+  description = "Threshold for scaling down the Auto Scaling Group"
+}
+
+variable "zone_name" {
+  type        = string
+  description = "Route53 zone name"
 }

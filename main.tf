@@ -15,6 +15,7 @@ module "vpc" {
   http_port_cidr              = var.http_port_cidr
   https_port_cidr             = var.https_port_cidr
   app_port_cidr               = var.app_port_cidr
+  egress_cidr                 = var.egress_cidr
   custom_ami_id               = var.custom_ami_id
   volume_size                 = var.volume_size
   volume_type                 = var.volume_type
@@ -33,4 +34,15 @@ module "vpc" {
   s3_transition_days          = var.s3_transition_days
   s3_transition_storage_class = var.s3_transition_storage_class
   region                      = var.region
+  asg_desired_capacity        = var.asg_desired_capacity
+  asg_max_capacity            = var.asg_max_capacity
+  asg_min_capacity            = var.asg_min_capacity
+  asg_cooldown_period         = var.asg_cooldown_period
+  asg_grace_period            = var.asg_grace_period
+  alb_health_check_path       = var.alb_health_check_path
+  asg_scale_down_adjustment   = var.asg_scale_down_adjustment
+  asg_scale_up_adjustment     = var.asg_scale_up_adjustment
+  asg_scale_down_threshold    = var.asg_scale_down_threshold
+  asg_scale_up_threshold      = var.asg_scale_up_threshold
+  zone_name                   = var.zone_name
 }
