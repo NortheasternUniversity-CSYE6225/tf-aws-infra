@@ -156,11 +156,6 @@ variable "rds_storage_type" {
   description = "RDS storage type"
 }
 
-variable "s3_encryption_algorithm" {
-  type        = string
-  description = "S3 encryption algorithm"
-}
-
 variable "s3_transition_days" {
   type        = number
   description = "S3 transition days"
@@ -224,4 +219,9 @@ variable "asg_scale_down_threshold" {
 variable "zone_name" {
   type        = string
   description = "Route53 zone name"
+}
+
+variable "certificate_arn" {
+  type        = string
+  description = "Certificate ARN for the Load Balancer"
 }

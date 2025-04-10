@@ -11,19 +11,21 @@ log() {
 log "Initializing User Data Script..."
 
 # Load environment variables from Terraform
+log "Fetching environment variables..."
 export DB_HOST="${DB_HOST}"
 export DB_PORT="${DB_PORT}"
 export DB_NAME="${DB_NAME}"
 export DB_USERNAME="${DB_USERNAME}"
-export DB_PASSWORD="${DB_PASSWORD}"
 export S3_BUCKET_NAME="${S3_BUCKET_NAME}"
 export REGION="${REGION}"
+export SECRET_ID="${SECRET_ID}"
+
+log "Fetching DB password from Secrets Manager..."
+SECRET_JSON=$(aws secretsmanager get-secret-value --secret-id ${SECRET_ID} --region ${REGION} --query SecretString --output text)
+export DB_PASSWORD=$(echo $SECRET_JSON | jq -r .password)
 
 # Ensure application directory exists
 sudo mkdir -p /opt/csye6225/webapp
-
-# Install postgresql client
-sudo apt install -y postgresql-client-16
 
 # Create application.properties file with environment variables
 log "Creating application.properties..."

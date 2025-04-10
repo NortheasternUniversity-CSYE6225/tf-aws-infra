@@ -47,3 +47,49 @@ resource "aws_iam_policy" "webapp_cloudwatch_metrics" {
     ]
   })
 }
+
+# Create an IAM policy that allows EC2 instances to access Secrets Manager for RDS password
+resource "aws_iam_policy" "secretsmanager_policy" {
+  name = "secretsmanager-rds-password-access"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "secretsmanager:GetSecretValue"
+        ],
+        Resource = aws_secretsmanager_secret.secret_string.arn
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "kms:Decrypt"
+        ],
+        Resource = aws_kms_key.secrets_manager_key.arn
+      }
+    ]
+  })
+}
+
+# Create an IAM policy that allows EC2 instances to access KMS key for EBS encryption
+resource "aws_iam_policy" "ec2_kms_key_access" {
+  name = "ec2-kms-key-access"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:GenerateDataKey*",
+          "kms:DescribeKey"
+        ],
+        Resource = aws_kms_key.ec2_key.arn
+      }
+    ]
+  })
+}
