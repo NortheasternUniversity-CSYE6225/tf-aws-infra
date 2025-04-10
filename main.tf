@@ -30,7 +30,6 @@ module "vpc" {
   rds_engine_version          = var.rds_engine_version
   rds_allocated_storage       = var.rds_allocated_storage
   rds_storage_type            = var.rds_storage_type
-  s3_encryption_algorithm     = var.s3_encryption_algorithm
   s3_transition_days          = var.s3_transition_days
   s3_transition_storage_class = var.s3_transition_storage_class
   region                      = var.region
@@ -45,4 +44,5 @@ module "vpc" {
   asg_scale_down_threshold    = var.asg_scale_down_threshold
   asg_scale_up_threshold      = var.asg_scale_up_threshold
   zone_name                   = var.zone_name
+  certificate_arn             = var.certificate_arn
 }

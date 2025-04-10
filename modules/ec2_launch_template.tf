@@ -33,8 +33,12 @@ resource "aws_launch_template" "webapp_lt" {
       volume_size           = var.volume_size
       volume_type           = var.volume_type
       delete_on_termination = var.delete_on_termination
+      encrypted             = true
+      kms_key_id            = aws_kms_key.ec2_key.arn
     }
   }
+
+  depends_on = [aws_kms_key.ec2_key]
 
   network_interfaces {
     associate_public_ip_address = true
@@ -50,8 +54,8 @@ resource "aws_launch_template" "webapp_lt" {
     DB_PORT        = aws_db_instance.postgres16_rds.port,
     DB_NAME        = aws_db_instance.postgres16_rds.db_name,
     DB_USERNAME    = aws_db_instance.postgres16_rds.username,
-    DB_PASSWORD    = random_password.rds_password.result,
     S3_BUCKET_NAME = aws_s3_bucket.bucket.id,
-    REGION         = var.region
+    REGION         = var.region,
+    SECRET_ID      = aws_secretsmanager_secret.secret_string.name
   }))
 }

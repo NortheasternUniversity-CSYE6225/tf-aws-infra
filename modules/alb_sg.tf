@@ -4,14 +4,6 @@ resource "aws_security_group" "lb_sg" {
   description = "Allows internet traffic to the Load Balancer"
   vpc_id      = aws_vpc.vpc.id
 
-  # HTTP
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = var.http_port_cidr
-  }
-
   # HTTPS
   ingress {
     from_port   = 443
