@@ -7,16 +7,16 @@ resource "aws_kms_key" "ec2_key" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid: "AllowRootAccess",
-        Effect: "Allow",
+        Sid : "AllowRootAccess",
+        Effect : "Allow",
         Principal = {
           AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         },
-        Action = "kms:*",
+        Action   = "kms:*",
         Resource = "*"
       },
       {
-        Sid: "AllowEC2WebappRoleKeyUsage",
+        Sid : "AllowEC2WebappRoleKeyUsage",
         Effect = "Allow",
         Principal = {
           AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-webapp-role"
@@ -32,7 +32,7 @@ resource "aws_kms_key" "ec2_key" {
         Resource = "*"
       },
       {
-        Sid: "AllowEC2WebappRoleGrants",
+        Sid : "AllowEC2WebappRoleGrants",
         Effect = "Allow",
         Principal = {
           AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-webapp-role"
@@ -50,7 +50,7 @@ resource "aws_kms_key" "ec2_key" {
         }
       },
       {
-        Sid: "AllowAutoScalingService",
+        Sid : "AllowAutoScalingService",
         Effect = "Allow",
         Principal = {
           Service = "autoscaling.amazonaws.com"
@@ -65,7 +65,7 @@ resource "aws_kms_key" "ec2_key" {
         Resource = "*"
       },
       {
-        Sid: "AllowAutoScalingServiceGrants",
+        Sid : "AllowAutoScalingServiceGrants",
         Effect = "Allow",
         Principal = {
           Service = "autoscaling.amazonaws.com"
@@ -147,28 +147,28 @@ resource "aws_kms_key" "s3_key" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid: "AllowRootAccess",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        Sid : "AllowRootAccess",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         },
-        Action: "kms:*",
-        Resource: "*"
+        Action : "kms:*",
+        Resource : "*"
       },
       {
-        Sid: "AllowEC2WebAppRole",
-        Effect: "Allow",
-        Principal: {
-          AWS: "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-webapp-role"
+        Sid : "AllowEC2WebAppRole",
+        Effect : "Allow",
+        Principal : {
+          AWS : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ec2-webapp-role"
         },
-        Action: [
+        Action : [
           "kms:Encrypt",
           "kms:Decrypt",
           "kms:GenerateDataKey",
           "kms:GenerateDataKeyWithoutPlaintext",
           "kms:DescribeKey"
         ],
-        Resource: "*"
+        Resource : "*"
       }
     ]
   })
