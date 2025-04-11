@@ -2,7 +2,9 @@ resource "aws_kms_key" "ec2_key" {
   description             = "KMS key for EC2"
   enable_key_rotation     = true
   deletion_window_in_days = 7
+  rotation_period_in_days = 90
   policy                  = data.aws_iam_policy_document.ec2_kms_policy.json
+
   tags = {
     Name = "ec2-key"
   }
@@ -17,6 +19,7 @@ resource "aws_kms_key" "db_key" {
   description             = "KMS key for RDS"
   enable_key_rotation     = true
   deletion_window_in_days = 7
+  rotation_period_in_days = 90
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -60,6 +63,7 @@ resource "aws_kms_key" "s3_key" {
   description             = "KMS key for S3 bucket"
   enable_key_rotation     = true
   deletion_window_in_days = 7
+  rotation_period_in_days = 90
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -105,6 +109,7 @@ resource "aws_kms_key" "secrets_manager_key" {
   description             = "KMS key for Secrets Manager"
   enable_key_rotation     = true
   deletion_window_in_days = 7
+  rotation_period_in_days = 90
 
   tags = {
     Name = "secrets-manager-key"
