@@ -7,6 +7,15 @@ This repository demonstrates AWS VPC networking setup using Terraform.
 - AWS CLI configured with appropriate credentials
 - Terraform installed (v1.0.0 or newer)
 
+## Run command to import the certificate into ACM
+```bash
+    aws acm import-certificate \
+    --certificate fileb://demo_shreyaspurkar_me.crt \
+    --private-key fileb://demo.shreyaspurkar.me.key \
+    --certificate-chain fileb://demo_shreyaspurkar_me.ca-bundle \
+    --region us-east-2
+```
+
 To check the versions installed:
 ```bash
   terraform --version

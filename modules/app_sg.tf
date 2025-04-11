@@ -1,4 +1,4 @@
-# Application Security Group (Updated)
+# Application Security Group
 resource "aws_security_group" "app_sg" {
   name        = "application-security-group"
   description = "Security group for web application"
@@ -12,7 +12,7 @@ resource "aws_security_group" "app_sg" {
     cidr_blocks = var.ssh_port_cidr
   }
 
-  # Application port (e.g., 8080) - only from Load Balancer SG
+  # Application port 8080
   ingress {
     from_port       = var.app_port
     to_port         = var.app_port

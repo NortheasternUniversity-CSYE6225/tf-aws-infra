@@ -37,3 +37,21 @@ resource "aws_iam_instance_profile" "ec2_webapp_profile" {
   name = "ec2-webapp-profile"
   role = aws_iam_role.ec2_webapp_role.name
 }
+
+# Attach the Secrets Manager policy to the role
+resource "aws_iam_role_policy_attachment" "secretsmanager_policy" {
+  role       = aws_iam_role.ec2_webapp_role.name
+  policy_arn = aws_iam_policy.secretsmanager_policy.arn
+}
+
+# Attach the KMS key access policy to the role
+resource "aws_iam_role_policy_attachment" "ec2_kms_key_access_policy" {
+  role       = aws_iam_role.ec2_webapp_role.name
+  policy_arn = aws_iam_policy.ec2_kms_key_access.arn
+}
+
+# Attach the S3 KMS key access policy to the role
+resource "aws_iam_role_policy_attachment" "s3_kms_key_access_policy" {
+  role       = aws_iam_role.ec2_webapp_role.name
+  policy_arn = aws_iam_policy.s3_kms_key_access.arn
+}
