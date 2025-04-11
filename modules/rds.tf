@@ -19,7 +19,7 @@ resource "random_password" "rds_password" {
 resource "random_string" "secret_name" {
   length           = 16
   special          = true
-  override_special = "/@£$"
+  override_special = "/_+=.@-"
 }
 
 # Create a secret in AWS Secrets Manager for RDS password
