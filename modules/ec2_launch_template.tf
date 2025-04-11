@@ -54,6 +54,7 @@ resource "aws_launch_template" "webapp_lt" {
     DB_PORT        = aws_db_instance.postgres16_rds.port,
     DB_NAME        = aws_db_instance.postgres16_rds.db_name,
     DB_USERNAME    = aws_db_instance.postgres16_rds.username,
+    DB_PASSWORD    = random_password.rds_password.result,
     S3_BUCKET_NAME = aws_s3_bucket.bucket.id,
     REGION         = var.region,
     SECRET_ID      = aws_secretsmanager_secret.secret_string.name
