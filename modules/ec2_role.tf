@@ -49,3 +49,9 @@ resource "aws_iam_role_policy_attachment" "ec2_kms_key_access_policy" {
   role       = aws_iam_role.ec2_webapp_role.name
   policy_arn = aws_iam_policy.ec2_kms_key_access.arn
 }
+
+# Attach the S3 KMS key access policy to the role
+resource "aws_iam_role_policy_attachment" "s3_kms_key_access_policy" {
+  role       = aws_iam_role.ec2_webapp_role.name
+  policy_arn = aws_iam_policy.s3_kms_key_access.arn
+}

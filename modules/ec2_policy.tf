@@ -93,3 +93,25 @@ resource "aws_iam_policy" "ec2_kms_key_access" {
     ]
   })
 }
+
+# Create an IAM policy that allows EC2 instances to access the S3 bucket with KMS encryption
+resource "aws_iam_policy" "s3_kms_key_access" {
+  name = "s3-kms-key-access"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "kms:Encrypt",
+          "kms:Decrypt",
+          "kms:GenerateDataKey",
+          "kms:GenerateDataKeyWithoutPlaintext",
+          "kms:DescribeKey"
+        ],
+        Resource = aws_kms_key.s3_key.arn
+      }
+    ]
+  })
+}
